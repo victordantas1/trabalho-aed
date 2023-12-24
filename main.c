@@ -18,7 +18,7 @@ int contaMesas(int area, int mesasTam, int esp) {
             if(countCol >= esp + mesasTam) {
                 countCol = 0;
             }
-            if(countCol < esp && countLin < esp) {
+            if(countCol < mesasTam && countLin < mesasTam) {
                 mat[i][j] = 1;
             }
             else {
