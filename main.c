@@ -1,35 +1,55 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <math.h>
 
-int main(void) {
+int contaMesas(int area, int mesasTam, int esp) {
+    int mesas, countLin, countCol;
+    countLin = countCol = 0;
+    mesas = 1;
+    area = (int) sqrt(area);
+    mesasTam = (int) sqrt(mesasTam);
+    int mat[area][area];
 
-    int notasA[3] = {1, 4, 5};
-    int notasB[3] = {2, 5, 6};
-    int notasC[3] = {3, 1, 4};
-    int mat[3][3];
-
-
-    for(int row = 0; row < 3; row++) {
-        for(int col = 0; col < 3; col++) {
-            if(row == 0) {
-                mat[row][col] = notasA[col];
+    for(int i = 0 ; i < area; i++) {
+        countCol = 0;
+        if(countLin >= esp + mesasTam) {
+            countLin = 0;
+        }
+        for(int j = 0; j < area; j++) {
+            if(countCol >= esp + mesasTam) {
+                countCol = 0;
             }
-            else if(row == 1){
-                mat[row][col] = notasB[col];
+            if(countCol < esp && countLin < esp) {
+                mat[i][j] = 1;
             }
             else {
-                mat[row][col] = notasC[col];
+                mat[i][j] = 0;
             }
+            countCol++;
         }
+        countLin++;
     }
-
-    for(int row = 0; row < 3; row++) {
-        char alunos[] = {'A', 'B', 'C'};
-        printf("Aluno %c: ", alunos[row]);
-        for(int col = 0; col < 3; col++) {
-            printf("%d ", mat[row][col]);
+    for(int i = 0; i < area; i++) {
+        for(int j = 0; j < area; j++) {
+            printf("%d ", mat[i][j]);
         }
         printf("\n");
     }
+    return mesas;
+}
 
+int main(void) {
+
+    int andares, i, mesasTam, areaAndar, esp;
+
+    printf("Insira a quantidade de andares do seu predio: ");
+    scanf("%d", &andares);
+
+    int predio[andares];
+
+    for(i = 0; i < andares; i++) {
+        printf("Insira a area(m²) do andar %d a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
+        scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
+        predio[i] = contaMesas(areaAndar, mesasTam, esp);
+    }
+    printf("%d", predio[1]);
 }
