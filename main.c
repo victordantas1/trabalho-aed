@@ -4,7 +4,7 @@
 int contaMesas(int area, int mesasTam, int esp) {
     int mesas, countLin, countCol;
     countLin = countCol = 0;
-    mesas = 1;
+    mesas = 0;
     area = (int) sqrt(area);
     mesasTam = (int) sqrt(mesasTam);
     int mat[area][area];
@@ -20,6 +20,7 @@ int contaMesas(int area, int mesasTam, int esp) {
             }
             if(countCol < mesasTam && countLin < mesasTam) {
                 mat[i][j] = 1;
+                mesas++;
             }
             else {
                 mat[i][j] = 0;
@@ -34,6 +35,7 @@ int contaMesas(int area, int mesasTam, int esp) {
         }
         printf("\n");
     }
+    mesas /= mesasTam * mesasTam;
     return mesas;
 }
 
@@ -51,5 +53,7 @@ int main(void) {
         scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
         predio[i] = contaMesas(areaAndar, mesasTam, esp);
     }
-    printf("%d", predio[1]);
+    for(i = 0; i < andares; i++) {
+        printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
+    }
 }
