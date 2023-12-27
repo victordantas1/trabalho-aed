@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
+
 int contaMesas(int area, int mesasTam, int esp) {
     int mesas, countLin, countCol;
     countLin = countCol = 0;
