@@ -30,15 +30,19 @@ int contaMesas(int area, int mesasTam, int esp) {
         }
         countLin++;
     }
-    for(int i = 0; i < area; i++) {
-        for(int j = 0; j < area; j++) {
+    
+    mesas /= mesasTam * mesasTam;
+    return mesas;
+}
+
+void printMat(int mat[][], int lin, int col) {
+    for(int i = 0; i < lin; i++) {
+        for(int j = 0; j < col; j++) {
             printf("%d ", mat[i][j]);
         }
         printf("\n");
     }
-    mesas /= mesasTam * mesasTam;
-    return mesas;
-}
+};
 
 int main(void) {
 
