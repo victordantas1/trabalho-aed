@@ -2,13 +2,24 @@
 #include <math.h>
 
 
+void imprimeMatriz(int *mat[], int col) {
+    for(int i = 0; i < col; i++) {
+        int arr[] = mat[i];
+        for(int j = 0; j < col; j++) {
+            printf("%d ", arr[j]);
+        }
+        printf("\n");
+    }
+}
+
 int contaMesas(int area, int mesasTam, int esp) {
     int mesas, countLin, countCol;
     countLin = countCol = 0;
     mesas = 0;
     area = (int) sqrt(area);
     mesasTam = (int) sqrt(mesasTam);
-    int mat[area][area];
+    int arr[area];
+    int *mat[area];
 
     for(int i = 0 ; i < area; i++) {
         countCol = 0;
@@ -20,29 +31,25 @@ int contaMesas(int area, int mesasTam, int esp) {
                 countCol = 0;
             }
             if(countCol < mesasTam && countLin < mesasTam) {
-                mat[i][j] = 1;
+                arr[j] = 1;
                 mesas++;
             }
             else {
-                mat[i][j] = 0;
+                arr[j] = 0;
             }
             countCol++;
         }
+        mat[i] = arr;
         countLin++;
     }
+
+    imprimeMatriz(mat, area);
     
     mesas /= mesasTam * mesasTam;
     return mesas;
 }
 
-void printMat(int mat[][], int lin, int col) {
-    for(int i = 0; i < lin; i++) {
-        for(int j = 0; j < col; j++) {
-            printf("%d ", mat[i][j]);
-        }
-        printf("\n");
-    }
-};
+
 
 int main(void) {
 
