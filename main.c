@@ -43,11 +43,12 @@ int contaMesas(int area, int mesasTam, int esp) {
         mat[i] = arr; // array de ponteiros recebe arr preenchido com valores
         countLin++;
     }
+
+    imprimeMatriz(mat, area);
     
     mesas /= mesasTam * mesasTam; // insere a quantidade de mesas que a sala comporta
     return mesas;
 }
-
 
 
 int main(void) {
