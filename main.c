@@ -72,20 +72,41 @@ int contaMesas(int area, int andar[area][area], int mesasTam, int espaco) {
 int main(void) {
 
     int andares, i, j, mesasTam, areaAndar, esp, numPredios, mesasPredio;
-
     printf("Insira a quantidade de predios que vc quer verificar: ");
     scanf("%d", &numPredios);
+    if(numPredios <= 0) {Insira um valor valor valido (area do andar > 0): 81
+Insira um valor valor valido (tamanho das mesas > 0): 9
+        printf("Insira um valor valor valido (numero de predios > 0): ");
+        scanf("%d", &numPredios);
+    }
     int predios[numPredios];
 
     for(j = 0; j < numPredios; j++) { // Laco para iteracao dos predios
         mesasPredio = 0;
         printf("Insira a quantidade de andares do predio %d: ", j + 1);
         scanf("%d", &andares);
+        if(andares <= 0) {
+            printf("Insira um valor valor valido (andares > 0): ");
+            scanf("%d", &andares);
+        }
         int predio[andares];
-        
+    
         for(i = 0; i < andares; i++) { // Laco para iteracao dos andares de cada predio
             printf("\nInsira a area(m²) do andar %d, a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
             scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
+
+            if(areaAndar <= 0) {
+                printf("Insira um valor valor valido (area do andar > 0): ");
+                scanf("%d", &areaAndar);
+            }
+            if(mesasTam <= 0) {
+                printf("Insira um valor valor valido (tamanho das mesas > 0): ");
+                scanf("%d", &mesasTam);
+            }
+            if(esp < 0) {
+                printf("Insira um valor valor valido (espacamento > 0): ");
+                scanf("%d", &esp);
+            }
             
             areaAndar = (int) sqrt(areaAndar); // passa o tamanho dos lados do andar
             mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
@@ -94,7 +115,7 @@ int main(void) {
             predio[i] = contaMesas(areaAndar, andar, mesasTam, esp);
             imprimeMatriz(areaAndar, andar, i + 1);
         }
-        
+    
         printf("\nTOTAL DE MESAS EM CADA ANDAR: \n");
         for(i = 0; i < andares; i++) {
             printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
