@@ -81,15 +81,19 @@ int main(void) {
         printf("Insira a quantidade de andares do predio %d: ", j + 1);
         scanf("%d", &andares);
         int predio[andares];
+        
         for(i = 0; i < andares; i++) { // Laco para iteracao dos andares de cada predio
             printf("\nInsira a area(m²) do andar %d, a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
             scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
+            
             areaAndar = (int) sqrt(areaAndar); // passa o tamanho dos lados do andar
             mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
+            
             int andar[areaAndar][areaAndar];
             predio[i] = contaMesas(areaAndar, andar, mesasTam, esp);
             imprimeMatriz(areaAndar, andar, i + 1);
         }
+        
         printf("\nTOTAL DE MESAS EM CADA ANDAR: \n");
         for(i = 0; i < andares; i++) {
             printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
@@ -98,10 +102,9 @@ int main(void) {
         printf("\n");
         predios[j] = mesasPredio;
     }
+    
     printf("TOTAL DE MESAS EM CADA PREDIO: \n");
     for(i = 0; i < numPredios; i++) {
         printf("O predio %d comporta no total %d mesas\n", i + 1, predios[i]);
     }
-    
-    
 }
