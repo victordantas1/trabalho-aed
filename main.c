@@ -25,21 +25,22 @@ int contaMesas(int area, int andar[area][area], int mesasTam, int espaco) {
     countLin = countCol = 0;
     mesas = 0;
   
-    if(area - (espaco + mesasTam) <= 1 && verificaImpar(area, mesasTam)) { // Verifica condicao para centralizar quando for somente uma mesa
+    if(area - (espaco + mesasTam) <= 2 && verificaImpar(area, mesasTam)) { // Verifica condicao para centralizar quando for somente uma mesa
         mesas = 1;
         central = area / 2;
         for(int i = 0; i < area; i++) {
             countCol = 0;
             for(int j = 0; j < area; j++) {
                 if( i >= central - 1 && j >= central - 1 
-                    && (area - countCol) >= mesasTam 
-                    && (area - countLin) >= mesasTam) {
+                    && countCol != mesasTam
+                    && countLin != mesasTam
+                    ) {
                     andar[i][j] = 1;
+                    countCol++;
                 }
                 else andar[i][j] = 0;
-                countCol++;
             }
-            countLin++;
+            if(countCol == mesasTam) countLin++;
         }
     }
     else {
