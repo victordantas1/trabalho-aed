@@ -74,8 +74,7 @@ int main(void) {
     int andares, i, j, mesasTam, areaAndar, esp, numPredios, mesasPredio;
     printf("Insira a quantidade de predios que vc quer verificar: ");
     scanf("%d", &numPredios);
-    if(numPredios <= 0) {Insira um valor valor valido (area do andar > 0): 81
-Insira um valor valor valido (tamanho das mesas > 0): 9
+    if(numPredios <= 0) {
         printf("Insira um valor valor valido (numero de predios > 0): ");
         scanf("%d", &numPredios);
     }
