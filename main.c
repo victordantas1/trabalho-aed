@@ -67,26 +67,37 @@ int contaMesas(int area, int sala[area][area], int mesasTam, int espaco) {
     return mesas;
 }
 
-
 int main(void) {
 
-    int andares, i, mesasTam, areaAndar, esp;
+    int andares, i, mesasTam, areaAndar, esp, numPredios, mesasPredio;
+    mesasPredio = 0;
 
-    printf("Insira a quantidade de andares do seu predio: ");
-    scanf("%d", &andares);
+    printf("Insira a quantidade de predios que vc quer verificar: ");
+    scanf("%d", &numPredios);
+    int predios[numPredios];
 
-    int predio[andares];
-
-    for(i = 0; i < andares; i++) {
-        printf("Insira a area(m²) do andar %d a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
-        scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
-        areaAndar = (int) sqrt(areaAndar); // passa o tamanho dos lados da sala
-        mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
-        int andar[areaAndar][areaAndar];
-        predio[i] = contaMesas(areaAndar, andar, mesasTam, esp);
-        imprimeMatriz(areaAndar, andar);
+    for(i = 0; i < numPredios; i++) {
+        printf("Insira a quantidade de andares do seu predio: ");
+        scanf("%d", &andares);
+        int predio[andares];
+        for(i = 0; i < andares; i++) {
+            printf("Insira a area(m²) do andar %d a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
+            scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
+            areaAndar = (int) sqrt(areaAndar); // passa o tamanho dos lados da sala
+            mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
+            int andar[areaAndar][areaAndar];
+            predio[i] = contaMesas(areaAndar, andar, mesasTam, esp);
+            imprimeMatriz(areaAndar, andar);
+        }
+        for(i = 0; i < andares; i++) {
+            printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
+            mesasPredio += predio[i];
+        }
+        predios[i] = mesasPredio;
     }
-    for(i = 0; i < andares; i++) {
-        printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
+    for(i = 0; i < numPredios; i++) {
+        printf("O predio %d comporta no total %d mesas", i + 1, predios[i]);
     }
+    
+    
 }
