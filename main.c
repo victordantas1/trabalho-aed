@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-void imprimeMatriz(int area, int mat[area][area]) { // teoricamente eh pra imprimir a matriz
+void imprimeMatriz(int area, int mat[area][area]) {
     printf("Disposicao das mesas nesse andar: \n");
     for(int i = 0; i < area; i++) {
         for(int j = 0; j < area; j++) {
