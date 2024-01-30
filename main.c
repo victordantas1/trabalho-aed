@@ -69,14 +69,14 @@ int contaMesas(int area, int sala[area][area], int mesasTam, int espaco) {
 
 int main(void) {
 
-    int andares, i, mesasTam, areaAndar, esp, numPredios, mesasPredio;
-    mesasPredio = 0;
+    int andares, i, j, mesasTam, areaAndar, esp, numPredios, mesasPredio;
 
     printf("Insira a quantidade de predios que vc quer verificar: ");
     scanf("%d", &numPredios);
     int predios[numPredios];
 
-    for(i = 0; i < numPredios; i++) {
+    for(j = 0; j < numPredios; j++) {
+        mesasPredio = 0;
         printf("Insira a quantidade de andares do seu predio: ");
         scanf("%d", &andares);
         int predio[andares];
@@ -93,10 +93,10 @@ int main(void) {
             printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
             mesasPredio += predio[i];
         }
-        predios[i] = mesasPredio;
+        predios[j] = mesasPredio;
     }
     for(i = 0; i < numPredios; i++) {
-        printf("O predio %d comporta no total %d mesas", i + 1, predios[i]);
+        printf("O predio %d comporta no total %d mesas\n", i + 1, predios[i]);
     }
     
     
