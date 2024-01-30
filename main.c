@@ -19,11 +19,11 @@ int contaMesas(int area, int sala[area][area], int mesasTam, int espaco) {
   
     for(int i = 0 ; i < area; i++) {
         countCol = 0;
-        if(countLin >= espaco + mesasTam) { // reseta o contador de linhas para que possa imprimir 1 dnv
+        if(countLin >= espaco + mesasTam && (area - i) >= mesasTam) { // reseta o contador de linhas para que possa imprimir 1 dnv
             countLin = 0;
         }
         for(int j = 0; j < area; j++) {
-            if(countCol >= espaco + mesasTam) { // reseta o contador de colunas para que possa imprimir 1 dnv
+            if(countCol >= espaco + mesasTam && (area - j) >= mesasTam) { // reseta o contador de colunas para que possa imprimir 1 dnv
                 countCol = 0;
             }
             if(countCol < mesasTam && countLin < mesasTam) { // insere 1 se os contadores sao menores que o tamanho da mesa
