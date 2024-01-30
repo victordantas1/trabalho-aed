@@ -2,45 +2,41 @@
 #include <math.h>
 
 
-void imprimeMatriz(int col, int *mat[]) { // teoricamente eh pra imprimir a matriz
-    for(int i = 0; i < col; i++) {
-        for(int j = 0; j < col; j++) {
+void imprimeMatriz(int area, int mat[area][area]) { // teoricamente eh pra imprimir a matriz
+    printf("Disposicao das mesas nesse andar: \n");
+    for(int i = 0; i < area; i++) {
+        for(int j = 0; j < area; j++) {
             printf("%d ", mat[i][j]);
         }
         printf("\n");
     }
 }
 
-int contaMesas(int area, int mesasTam, int esp) {
+int contaMesas(int area, int sala[area][area], int mesasTam, int espaco) {
     int mesas, countLin, countCol;
     countLin = countCol = 0;
     mesas = 0;
-    area = (int) sqrt(area); // passa o tamanho dos lados da sala
-    mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
-    int mat[area][area];
-
+  
     for(int i = 0 ; i < area; i++) {
         countCol = 0;
-        if(countLin >= esp + mesasTam) { // reseta o contador de linhas para que possa imprimir 1 dnv
+        if(countLin >= espaco + mesasTam) { // reseta o contador de linhas para que possa imprimir 1 dnv
             countLin = 0;
         }
         for(int j = 0; j < area; j++) {
-            if(countCol >= esp + mesasTam) { // reseta o contador de colunas para que possa imprimir 1 dnv
+            if(countCol >= espaco + mesasTam) { // reseta o contador de colunas para que possa imprimir 1 dnv
                 countCol = 0;
             }
             if(countCol < mesasTam && countLin < mesasTam) { // insere 1 se os contadores sao menores que o tamanho da mesa
-                mat[i][j] = 1;
+                sala[i][j] = 1;
                 mesas++;
             }
             else { // insere 0 se passar do tamanho da mesa
-                mat[i][j] = 0;
+                sala[i][j] = 0;
             }
             countCol++;
         }
         countLin++;
     }
-
-    imprimeMatriz(area, mat);
     
     mesas /= mesasTam * mesasTam; // insere a quantidade de mesas que a sala comporta
     return mesas;
@@ -59,7 +55,11 @@ int main(void) {
     for(i = 0; i < andares; i++) {
         printf("Insira a area(m²) do andar %d a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
         scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
-        predio[i] = contaMesas(areaAndar, mesasTam, esp);
+        areaAndar = (int) sqrt(areaAndar); // passa o tamanho dos lados da sala
+        mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
+        int andar[areaAndar][areaAndar];
+        predio[i] = contaMesas(areaAndar, andar, mesasTam, esp);
+        imprimeMatriz(areaAndar, andar);
     }
     for(i = 0; i < andares; i++) {
         printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
