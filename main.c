@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 
-void imprimeMatriz(int area, int mat[area][area]) {
-    printf("Disposicao das mesas nesse andar: \n");
+void imprimeMatriz(int area, int mat[area][area], int andar) {
+    printf("\nDisposicao das mesas no andar %d: \n", andar);
     for(int i = 0; i < area; i++) {
         for(int j = 0; j < area; j++) {
             printf("%d ", mat[i][j]);
@@ -13,9 +13,8 @@ void imprimeMatriz(int area, int mat[area][area]) {
     }
 }
 
-int verificaParidade(int num1, int num2) {
-    if(num1 % 2 == 0 && num2 % 2 == 0) return 1;
-    else if(num1 % 2 != 0 && num2 % 2 != 0) return 1;
+int verificaImpar(int num1, int num2) {
+    if(num1 % 2 != 0 && num2 % 2 != 0) return 1;
     else return 0;
 }
 
@@ -24,9 +23,9 @@ int contaMesas(int area, int sala[area][area], int mesasTam, int espaco) {
     countLin = countCol = 0;
     mesas = 0;
   
-    if(area - (espaco + mesasTam) <= 1 && verificaParidade(area, mesasTam)) {
+    if(area - (espaco + mesasTam) <= 1 && verificaImpar(area, mesasTam)) {
         mesas = 1;
-        central = (area - 1) / 2;
+        central = area / 2;
         for(int i = 0; i < area; i++) {
             countCol = 0;
             for(int j = 0; j < area; j++) {
@@ -77,24 +76,27 @@ int main(void) {
 
     for(j = 0; j < numPredios; j++) {
         mesasPredio = 0;
-        printf("Insira a quantidade de andares do seu predio: ");
+        printf("Insira a quantidade de andares do predio %d: ", j + 1);
         scanf("%d", &andares);
         int predio[andares];
         for(i = 0; i < andares; i++) {
-            printf("Insira a area(m²) do andar %d a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
+            printf("\nInsira a area(m²) do andar %d, a area ocupada pelas mesas e o espacamento entre elas: ", i + 1);
             scanf("%d %d %d", &areaAndar, &mesasTam, &esp);
             areaAndar = (int) sqrt(areaAndar); // passa o tamanho dos lados da sala
             mesasTam = (int) sqrt(mesasTam); // passa o tamanho dos lados da mesa
             int andar[areaAndar][areaAndar];
             predio[i] = contaMesas(areaAndar, andar, mesasTam, esp);
-            imprimeMatriz(areaAndar, andar);
+            imprimeMatriz(areaAndar, andar, i + 1);
         }
+        printf("\nTOTAL DE MESAS EM CADA ANDAR: \n");
         for(i = 0; i < andares; i++) {
             printf("O andar %d comporta %d mesas\n", i+1, predio[i]);
             mesasPredio += predio[i];
         }
+        printf("\n");
         predios[j] = mesasPredio;
     }
+    printf("TOTAL DE MESAS EM CADA PREDIO: \n");
     for(i = 0; i < numPredios; i++) {
         printf("O predio %d comporta no total %d mesas\n", i + 1, predios[i]);
     }
